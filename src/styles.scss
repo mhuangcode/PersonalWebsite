@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Sen&display=swap');
+
+html, body {
+    color: #270031;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Sen', sans-serif;
+}
+
+body {
+    background: rgb(163, 237, 255);
+    background: linear-gradient(135deg, rgb(183, 255, 243) 25%, rgb(255, 227, 236) 75%);
+}
