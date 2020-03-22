@@ -1,169 +1,187 @@
-
 .main-container {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    transition: color 750ms;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transition: color 750ms;
 
-    .subtext {
-        padding-left: 0.7vw;
-    }
+  .subtext {
+    padding-left: 0.7vw;
+    font-size: 1.5vmin;
 
-    .name {
-        transition: font-size 500ms;
-    }
+    .inactive-icons {
+      padding-left: 0.2vw;
+      padding-top: 0.5vh;
+      padding-bottom: 0.75vh;
 
-    svg:hover {
-        cursor: pointer;
+      svg {
+        max-width: 2.5vmin;
         opacity: 1;
+      }
+
+      svg:hover {
+        cursor: default;
+        fill: rgb(75, 204, 144);
+      }
     }
 
-    svg {
-        opacity: 0.65;
-        transition: fill 500ms;
-    }
+  }
+
+  .name {
+    transition: font-size 500ms;
+  }
+
+  svg:hover {
+    cursor: pointer;
+    opacity: 1;
+  }
+
+  svg {
+    opacity: 0.65;
+    transition: fill 500ms;
+  }
 
 }
 
-.main-text{
-    padding: 15px;
-    border-radius: 30px;
+ul {
+  padding: 0;
+  margin-block-start: 0;
+}
+
+.main-text {
+  padding: 15px;
+  border-radius: 30px;
 }
 
 .large {
-    text-align: left;
+  text-align: left;
 
-    .main-text{
-        margin-left: 2vw;
-        max-width: 27.7vw;
+  .main-text {
+    margin-left: 2vw;
+    max-width: 27.7vw;
+  }
+
+  button {
+    max-width: 3px;
+    min-width: 3vw;
+
+    border-radius: 30px;
+  }
+
+
+  .icon-links {
+    position: fixed;
+    right: 3vw;
+
+    .icon-title {
+      font-size: 1.8vw;
+      font-weight: 500;
+      padding-bottom: 0.5vh;
+      margin-right: 1vw;
+      transition: opacity 600ms;
+    }
+  }
+
+  .name {
+    font-size: 8.5vw;
+    font-weight: 800;
+    line-height: 0.9;
+  }
+
+  .title {
+    font-size: 2vw;
+  }
+
+  .desc {
+    margin-top: 1vh;
+    font-size: 1vw;
+
+    ul {
+      li {
+        list-style-type: none;
+        margin-top: 1vh;
+        font-size: 0.75vw;
+        text-align: justify;
+      }
+
     }
 
-    button {
-        max-width: 3px;
-        min-width: 3vw;
-
-        border-radius: 30px;
+    div {
+      font-size: 0.8vw;
+      font-weight: 550;
+      padding-top: 1.25vh;
     }
-
-    
-    .icon-links {
-        position: fixed;
-        right: 3vw;
-
-        .icon-title {
-            font-size: 1.8vw;
-            font-weight: 500;
-            padding-bottom: 0.5vh;
-            margin-right: 1vw;
-            transition: opacity 600ms;
-        }
-    }
-
-    .name {
-        font-size: 8.5vw;
-        font-weight: 800;
-        line-height: 0.9;
-    }
-    
-    .title {
-        font-size: 2vw;
-    }
-    
-    .desc {
-        margin-top: 2vh;
-        font-size: 1vw;
-
-        ul {
-            padding: 0;
-            margin-block-start: 0;
-            li {
-                list-style-type: none;
-                margin-top: 1vh;
-                font-size: 0.75vw;
-                text-align: justify;
-            }
-    
-        }
-
-        div {
-            font-size: 0.8vw;
-            font-weight: 550;
-            padding-top: 1.25vh;
-        }
-    }
+  }
 }
 
 .small {
-    text-align: center;
-    margin-left: 0;
-    max-width: 100%;
+  text-align: center;
+  margin-left: 0;
+  max-width: 100%;
 
-    .icon-links {
-        position: relative;
-        right: 0;
+  .icon-links {
+    position: relative;
+    right: 0;
 
-        .icon-container {
-            max-width: 32px;
-            margin-left: 5vw;
-            margin-right: 5vw;
-        }
-
-        .icon-title {
-            max-height: 32px;
-            min-height: 32px;
-            font-size: 1.25vh;
-            margin-right: 0;
-            text-align: center;
-            transition: opacity 600ms;
-        }
+    .icon-container {
+      max-width: 32px;
+      margin-left: 5vw;
+      margin-right: 5vw;
     }
 
-    button {
-        max-width: 64px;
-        min-width: 5vmin;
+    .icon-title {
+      max-height: 32px;
+      min-height: 32px;
+      font-size: 1.25vh;
+      margin-right: 0;
+      text-align: center;
+      transition: opacity 600ms;
+    }
+  }
 
-        svg {
-            margin-top: 2vh;
-        }
+  button {
+    max-width: 64px;
+    min-width: 5vmin;
 
-        svg:hover {
-            margin-top: 2vh;
-        }
+    svg {
+      margin-top: 2vh;
     }
 
-    .name {
-        font-size: 16vmin;
-        font-weight: 700;
-        line-height: 0.8;
-        margin-bottom: 2vh;
+    svg:hover {
+      margin-top: 2vh;
     }
-    
-    .title {
-        font-size: 3vmin;
-    }
-    
-    .desc {
+  }
+
+  .name {
+    font-size: 16vmin;
+    font-weight: 700;
+    line-height: 0.8;
+    margin-bottom: 2vh;
+  }
+
+  .title {
+    font-size: 3vmin;
+  }
+
+  .desc {
+    margin-top: 1vh;
+    font-size: 2.5vmin;
+
+    ul {
+      li {
+        list-style-type: none;
         margin-top: 1vh;
-        font-size: 2.5vmin;
+        text-align: center;
+        font-size: 1.5vmin;
+        width: 36vw;
+        padding-left: 27.5vw;
+        font-weight: 50;
+      }
 
-        ul {
-            padding-left: 0vw;
-
-            li {
-                list-style-type: none;
-                margin-top: 1vh;
-                text-align: center;
-                font-size: 1.5vmin;
-                width: 36vw;
-                padding-left: 27.5vw;
-                font-weight: 50;
-            }
-    
-        }
-
-        div {
-            font-size: 2vmin;
-            font-weight: 50;
-        }
     }
+
+    div {
+      font-size: 2vmin;
+      font-weight: 50;
+    }
+  }
 }

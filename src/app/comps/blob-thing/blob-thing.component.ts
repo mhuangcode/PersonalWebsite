@@ -4,7 +4,8 @@ import {
   ElementRef,
   AfterViewInit,
   ViewChild,
-  HostListener
+  HostListener,
+  AfterViewChecked
 } from '@angular/core';
 
 import {
@@ -68,14 +69,6 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
       this.renderer.setClearColor(0x000000, 0.0);
       this.canvasElem.nativeElement.appendChild(this.renderer.domElement);
       this.camera.position.z = 32;
-
-      const light = new AmbientLight(0xffffff, 3);
-      light.color.setHSL(0.1, 1, 0.95);
-      light.position.set(-1, 1.75, 1);
-      light.position.multiplyScalar(30);
-      light.castShadow = false;
-
-      this.scene.add(light);
       this.generateGeometry();
       resolve();
     }).then(() => {
@@ -90,9 +83,6 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
 
 
     this.renderer.render(this.scene, this.camera);
-    // heavier math causing stall on first load of the site,
-    // putting it at the end of the call stack since it should happen
-    // after render is finished
     this.updateBlob();
   }
 
@@ -104,14 +94,16 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
     this.blobMesh.rotation.y += 0.0025;
     this.blobMesh.rotation.x += 0.0035;
 
-    const now = window.performance.now();
+    const now = Date.now();
+    const radius = this.blobGeometry.parameters.radius;
+
     this.blobGeometry.vertices.forEach( vert => {
       vert.normalize();
-      vert.multiplyScalar(this.noise.noise3D(
-        this.blobGeometry.parameters.radius * Math.cos(now * 3.14 * 0.0000035) + vert.x,
-        Math.sin(now * 3.14 * 0.0000025) * (this.blobGeometry.parameters.radius),
-        Math.sin(now * 3.14 * 0.00005) * vert.z
-      ) * 5 + this.blobGeometry.parameters.radius);
+      vert.multiplyScalar(radius + this.noise.noise3D(
+        Math.cos(now * 0.000125) * vert.x,
+        Math.sin(now * 0.000063) * vert.y,
+        Math.sin(now * 0.000038) * vert.z
+      ) * 5);
     })
 
     this.blobGeometry.verticesNeedUpdate = true;

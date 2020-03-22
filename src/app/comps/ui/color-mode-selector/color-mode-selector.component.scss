@@ -4,11 +4,12 @@
     top: 2vmin;
     font-size: 1vmin;
     color: rgba(0, 0, 0, 0.6);
-    width: 80px;
+    width: 9vw;
+    max-width: 80px;
     opacity: 0.45;
 
     svg {
-        margin-top: 2px;
+        margin-top: 0.1vh;
         transition: fill 500ms;
         fill: black;
         
