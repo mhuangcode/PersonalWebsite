@@ -7,6 +7,7 @@ import { BlobThingComponent } from './comps/blob-thing/blob-thing.component';
 import { MainLayoutComponent } from './comps/ui/main-layout/main-layout.component';
 import { TextLayerComponent } from './comps/ui/main-layout/text-layer/text-layer.component';
 import { ZoomDirective } from './helpers/directives/zoom.directive';
+import { ColorModeSelectorComponent } from './comps/ui/color-mode-selector/color-mode-selector.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { ZoomDirective } from './helpers/directives/zoom.directive';
     BlobThingComponent,
     MainLayoutComponent,
     TextLayerComponent,
-    ZoomDirective
+    ZoomDirective,
+    ColorModeSelectorComponent
   ],
   imports: [
     BrowserModule,

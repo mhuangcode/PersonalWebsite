@@ -1,7 +1,15 @@
-<app-blob-thing></app-blob-thing>
+<div [ngClass]="['small', 'large']" class={{colorModeClass}} [ngClass.gt-sm]="{'small': false, 'large': true}">
+  <app-blob-thing></app-blob-thing>
 
-<app-text-layer></app-text-layer>
+  <app-text-layer></app-text-layer>
 
-<div class="boring-rights">
-    © 2020 Martin Huang. All rights reserved. 
+  <app-color-mode-selector></app-color-mode-selector>
+
+  <div class="boring-rights">
+    © 2020 Martin Huang. All rights reserved.
+  </div>
 </div>
+
+
+
+

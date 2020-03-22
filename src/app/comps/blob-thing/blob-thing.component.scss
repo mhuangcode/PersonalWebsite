@@ -3,11 +3,11 @@
     height: 100vh;
     position: fixed;
     top: 0;
-    
+    transition: left ease-in-out 1000ms;
 }
 
 .large {
-    left: 8vw;
+    left: 9vw;
 }
 
 .small {

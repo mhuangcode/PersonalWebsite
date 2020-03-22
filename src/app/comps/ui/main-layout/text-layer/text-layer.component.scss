@@ -13,25 +13,19 @@
         transition: font-size 500ms;
     }
 
-    button {
-        background: none;
-        border: none;
-        opacity: 0.65;
-    }
-
-    button:hover {
+    svg:hover {
         cursor: pointer;
         opacity: 1;
     }
 
     svg {
+        opacity: 0.65;
         transition: fill 500ms;
     }
 
 }
 
 .main-text{
-    text-shadow: rgba(200, 230, 255, 0.2) 2px 2px;
     padding: 15px;
     border-radius: 30px;
 }
@@ -41,7 +35,7 @@
 
     .main-text{
         margin-left: 2vw;
-        max-width: 28vw;
+        max-width: 27.7vw;
     }
 
     button {
@@ -49,14 +43,6 @@
         min-width: 3vw;
 
         border-radius: 30px;
-
-        svg {
-            fill: #270031;
-        }
-
-        svg:hover {
-            fill: #97196d;
-        }
     }
 
     
@@ -70,12 +56,11 @@
             padding-bottom: 0.5vh;
             margin-right: 1vw;
             transition: opacity 600ms;
-            color: #a83298;
         }
     }
 
     .name {
-        font-size: 8vw;
+        font-size: 8.5vw;
         font-weight: 800;
         line-height: 0.9;
     }
@@ -87,6 +72,24 @@
     .desc {
         margin-top: 2vh;
         font-size: 1vw;
+
+        ul {
+            padding: 0;
+            margin-block-start: 0;
+            li {
+                list-style-type: none;
+                margin-top: 1vh;
+                font-size: 0.75vw;
+                text-align: justify;
+            }
+    
+        }
+
+        div {
+            font-size: 0.8vw;
+            font-weight: 550;
+            padding-top: 1.25vh;
+        }
     }
 }
 
@@ -94,8 +97,6 @@
     text-align: center;
     margin-left: 0;
     max-width: 100%;
-    color: rgb(255, 255, 255);
-    text-shadow: rgba(0, 30, 54, 0.2) 2px 2px 2px;
 
     .icon-links {
         position: relative;
@@ -103,12 +104,13 @@
 
         .icon-container {
             max-width: 32px;
+            margin-left: 5vw;
+            margin-right: 5vw;
         }
 
         .icon-title {
-            color: rgb(124, 211, 214);
             max-height: 32px;
-            min-height: 2vmin;
+            min-height: 32px;
             font-size: 1.25vh;
             margin-right: 0;
             text-align: center;
@@ -122,28 +124,46 @@
 
         svg {
             margin-top: 2vh;
-            fill: rgb(255, 255, 255);
         }
 
         svg:hover {
             margin-top: 2vh;
-            fill: rgb(195, 253, 255);
         }
     }
 
     .name {
-        font-size: 15vmin;
+        font-size: 16vmin;
         font-weight: 700;
         line-height: 0.8;
         margin-bottom: 2vh;
     }
     
     .title {
-        font-size: 5vmin;
+        font-size: 3vmin;
     }
     
     .desc {
         margin-top: 1vh;
-        font-size: 2vmin;
+        font-size: 2.5vmin;
+
+        ul {
+            padding-left: 0vw;
+
+            li {
+                list-style-type: none;
+                margin-top: 1vh;
+                text-align: center;
+                font-size: 1.5vmin;
+                width: 36vw;
+                padding-left: 27.5vw;
+                font-weight: 50;
+            }
+    
+        }
+
+        div {
+            font-size: 2vmin;
+            font-weight: 50;
+        }
     }
 }

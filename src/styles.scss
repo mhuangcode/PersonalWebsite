@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Sen&display=swap');
 
 html, body {
-    color: #270031;
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -9,7 +8,110 @@ html, body {
     font-family: 'Sen', sans-serif;
 }
 
-body {
+button {
+    background: none;
+    border: none;
+    
+}
+
+button:focus {
+    outline: none;
+}
+
+
+
+.light {
     background: rgb(163, 237, 255);
     background: linear-gradient(135deg, rgb(183, 255, 243) 25%, rgb(255, 227, 236) 75%);
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+
+    .large {
+        color: #270031;
+
+        canvas {
+            opacity: 1;
+        }
+    
+        svg {
+            fill: #270031;
+        }
+
+        svg:hover {
+            fill: #97196d;
+        }
+
+        .secondary {
+            color: #a83298;
+        }
+    }
+
+    .small {
+        color: #1d0025;
+
+        canvas {
+            opacity: 0.4;
+        }
+
+        svg {
+            fill: #1d0025;
+        }
+
+        svg:hover {
+            fill: rgb(0, 35, 36);
+        }
+        
+        .secondary {
+            color: rgb(0, 35, 36);
+        }
+    }
+}
+
+.dark {
+    background: rgb(25, 110, 131);
+    background: linear-gradient(135deg, rgb(0, 36, 36) 45%, rgb(36, 0, 30) 85%);
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    color: rgb(231, 231, 231);
+
+    canvas {
+        opacity: 0.8;
+        transition: opacity ease-in 1000ms;
+    }
+    
+    .large {
+        svg {
+            fill: #fae8ff;
+        }
+
+        svg:hover {
+            fill: #ffd0ef;
+        }
+
+        .secondary {
+            color: #a83298;
+        }
+    }
+
+    .small {
+        canvas {
+            opacity: 0.3;
+        }
+
+        svg {
+            fill: white;
+        }
+
+        svg:hover {
+            fill: rgb(195, 253, 255);
+        }
+        
+        .secondary {
+            color: rgb(124, 211, 214);
+        }
+    }
 }

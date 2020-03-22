@@ -122,7 +122,9 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
 
   private generateGeometry(): void {
     this.blobGeometry = new IcosahedronGeometry(15, 5);
-    const mat = new MeshNormalMaterial({});
+    const mat = new MeshNormalMaterial({
+      wireframe: true
+    });
     this.blobMesh = new Mesh(this.blobGeometry, mat);
     this.scene.add(this.blobMesh);
   }
