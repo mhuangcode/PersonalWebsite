@@ -2,32 +2,11 @@
   width: 100%;
   height: 100%;
   position: absolute;
-  transition: color 750ms;
+  top: 0;
+  transition: color ease-in 500ms;
 
-  .subtext {
-    padding-left: 0.7vw;
-    font-size: 1.5vmin;
-
-    .inactive-icons {
-      padding-left: 0.2vw;
-      padding-top: 0.5vh;
-      padding-bottom: 0.75vh;
-
-      svg {
-        max-width: 2.5vmin;
-        opacity: 1;
-      }
-
-      svg:hover {
-        cursor: default;
-        fill: rgb(75, 204, 144);
-      }
-    }
-
-  }
-
-  .name {
-    transition: font-size 500ms;
+  .info-container {
+    padding-left: 2vw;
   }
 
   svg:hover {
@@ -39,24 +18,12 @@
     opacity: 0.65;
     transition: fill 500ms;
   }
-
-}
-
-ul {
-  padding: 0;
-  margin-block-start: 0;
-}
-
-.main-text {
-  padding: 15px;
-  border-radius: 30px;
 }
 
 .large {
   text-align: left;
 
-  .main-text {
-    margin-left: 2vw;
+  .info-container {
     max-width: 27.7vw;
   }
 
@@ -67,10 +34,10 @@ ul {
     border-radius: 30px;
   }
 
-
-  .icon-links {
+  .footer {
     position: fixed;
     right: 3vw;
+    overflow: hidden;
 
     .icon-title {
       font-size: 1.8vw;
@@ -81,56 +48,34 @@ ul {
     }
   }
 
-  .name {
+  h1 {
     font-size: 8.5vw;
-    font-weight: 800;
+    margin-block-start: 0;
+    padding-left: 1.25vmax;
+    max-width: 27.7vw;
     line-height: 0.9;
-  }
-
-  .title {
-    font-size: 2vw;
-  }
-
-  .desc {
-    margin-top: 1vh;
-    font-size: 1vw;
-
-    ul {
-      li {
-        list-style-type: none;
-        margin-top: 1vh;
-        font-size: 0.75vw;
-        text-align: justify;
-      }
-
-    }
-
-    div {
-      font-size: 0.8vw;
-      font-weight: 550;
-      padding-top: 1.25vh;
-    }
   }
 }
 
 .small {
-  text-align: center;
-  margin-left: 0;
-  max-width: 100%;
+  text-align: justify;
 
-  .icon-links {
-    position: relative;
+  .info-container {
+    margin-block-end: 20px;
+    max-width: 80vw;
+  }
+
+  .footer {
+    bottom: 15px;
+    width: 100vw;
     right: 0;
+    position: fixed;
 
     .icon-container {
-      max-width: 32px;
-      margin-left: 5vw;
-      margin-right: 5vw;
+      max-width: 5vw;
     }
 
     .icon-title {
-      max-height: 32px;
-      min-height: 32px;
       font-size: 1.25vh;
       margin-right: 0;
       text-align: center;
@@ -139,8 +84,8 @@ ul {
   }
 
   button {
-    max-width: 64px;
-    min-width: 5vmin;
+    max-width: 8vh;
+    min-width: 6vh;
 
     svg {
       margin-top: 2vh;
@@ -151,37 +96,11 @@ ul {
     }
   }
 
-  .name {
-    font-size: 16vmin;
+  h1 {
+    font-size: 20vmin;
     font-weight: 700;
-    line-height: 0.8;
-    margin-bottom: 2vh;
-  }
-
-  .title {
-    font-size: 3vmin;
-  }
-
-  .desc {
-    margin-top: 1vh;
-    font-size: 2.5vmin;
-
-    ul {
-      li {
-        list-style-type: none;
-        margin-top: 1vh;
-        text-align: center;
-        font-size: 1.5vmin;
-        width: 36vw;
-        padding-left: 27.5vw;
-        font-weight: 50;
-      }
-
-    }
-
-    div {
-      font-size: 2vmin;
-      font-weight: 50;
-    }
+    line-height: 0.75;
+    margin-bottom: 1vh;
+    padding-left: 0vmax;
   }
 }

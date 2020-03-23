@@ -4,44 +4,39 @@ import {
   ElementRef,
   AfterViewInit,
   ViewChild,
-  HostListener,
-  AfterViewChecked
-} from '@angular/core';
+  HostListener
+} from "@angular/core";
 
 import {
   Scene,
   PerspectiveCamera,
   WebGLRenderer,
   Mesh,
-  AmbientLight,
   MeshNormalMaterial,
   IcosahedronGeometry
-} from 'three';
+} from "three";
 
-
-import * as SimplexNoise from 'simplex-noise';
-
+import * as SimplexNoise from "simplex-noise";
+const noise = new SimplexNoise();
 @Component({
-  selector: 'app-blob-thing',
-  templateUrl: './blob-thing.component.html',
-  styleUrls: ['./blob-thing.component.scss']
+  selector: "app-blob-thing",
+  templateUrl: "./blob-thing.component.html",
+  styleUrls: ["./blob-thing.component.scss"]
 })
 export class BlobThingComponent implements OnInit, AfterViewInit {
-  @HostListener('window:resize', [])
+  @HostListener("window:resize", [])
   onWinResize() {
     if (this.camera) {
       const width = window.innerWidth;
-      const height = window.innerHeight;
+      const height = window.innerHeight * 0.95;
       this.camera.aspect = width / height;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(width, height);
     }
   }
 
-  @ViewChild('threeStats') statsElem: ElementRef;
-  @ViewChild('threeCanvas') canvasElem: ElementRef;
-
-  private noise = new SimplexNoise();
+  @ViewChild("threeStats") statsElem: ElementRef;
+  @ViewChild("threeCanvas") canvasElem: ElementRef;
 
   private scene: Scene = new Scene();
   private renderer: WebGLRenderer = new WebGLRenderer({
@@ -49,19 +44,58 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
     antialias: true
   });
   private camera: PerspectiveCamera;
-  private blobGeometry: IcosahedronGeometry;
+
+  private blobGeometry: IcosahedronGeometry = new IcosahedronGeometry(15, 5);
   private blobMesh: Mesh;
 
+  private mathWorker: Worker;
+  private mathLock = true;
+  private tick = 0;
+
+  private started = false;
   canvasDom: any;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.mathWorker = new Worker("./../../helpers/math.worker", {
+      type: "module"
+    });
+
+    this.mathWorker.onmessage = data => {
+      this.blobGeometry.vertices.forEach((vert, index) => {
+        vert.normalize();
+        vert.multiplyScalar(
+          this.blobGeometry.parameters.radius +
+            noise.noise3D(
+              data.data[index].x + vert.x,
+              data.data[index].y + vert.y,
+              data.data[index].z + vert.z
+            ) *
+              5
+        );
+      });
+
+      this.blobGeometry.verticesNeedUpdate = true;
+      this.mathLock = false;
+      this.tick += 1;
+
+      if (!this.started) {
+        this.scene.add(this.blobMesh);
+        this.canvasElem.nativeElement.style.opacity = "inherit";
+        this.started = true;
+      }
+    };
+
+    this.mathLock = false;
+  }
 
   ngAfterViewInit(): void {
+    this.canvasElem.nativeElement.style.opacity = 0;
+
     new Promise((resolve, reject) => {
       const width = window.innerWidth;
-      const height = window.innerHeight;
+      const height = window.innerHeight * 0.95;
 
       this.camera = new PerspectiveCamera(75, width / height, 0.1, 1000);
       this.camera.updateProjectionMatrix();
@@ -78,46 +112,36 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
 
   private animate(): void {
     requestAnimationFrame(() => {
-        this.animate();
+      this.animate();
     });
-
 
     this.renderer.render(this.scene, this.camera);
     this.updateBlob();
   }
 
   private updateBlob(): void {
-    if (!this.blobGeometry) {
+    if (this.blobGeometry) {
+      this.blobMesh.rotation.y += 0.001;
+      this.blobMesh.rotation.x += 0.0005;
+    }
+
+    if (this.mathLock) {
       return;
     }
 
-    this.blobMesh.rotation.y += 0.0025;
-    this.blobMesh.rotation.x += 0.0035;
-
-    const now = Date.now();
     const radius = this.blobGeometry.parameters.radius;
-
-    this.blobGeometry.vertices.forEach( vert => {
-      vert.normalize();
-      vert.multiplyScalar(radius + this.noise.noise3D(
-        Math.cos(now * 0.000125) * vert.x,
-        Math.sin(now * 0.000063) * vert.y,
-        Math.sin(now * 0.000038) * vert.z
-      ) * 5);
-    })
-
-    this.blobGeometry.verticesNeedUpdate = true;
-    this.blobGeometry.normalsNeedUpdate = true;
-    this.blobGeometry.computeVertexNormals();
-    this.blobGeometry.computeFaceNormals();
+    this.mathWorker.postMessage({
+      now: this.tick,
+      radius: radius,
+      verts: this.blobGeometry.vertices
+    });
+    this.mathLock = true;
   }
 
   private generateGeometry(): void {
-    this.blobGeometry = new IcosahedronGeometry(15, 5);
     const mat = new MeshNormalMaterial({
       wireframe: true
     });
     this.blobMesh = new Mesh(this.blobGeometry, mat);
-    this.scene.add(this.blobMesh);
   }
 }

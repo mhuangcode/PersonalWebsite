@@ -1,4 +1,9 @@
-<div [ngClass]="['small', 'large']" class={{colorModeClass}} [ngClass.gt-sm]="{'small': false, 'large': true}">
+<div
+  [ngClass]="['small', 'large']"
+  class="{{ colorModeClass }}"
+  [ngClass.gt-sm]="{ small: false, large: true }"
+  fxFill
+>
   <app-blob-thing></app-blob-thing>
 
   <app-text-layer></app-text-layer>
@@ -9,7 +14,3 @@
     © 2020 Martin Huang. All rights reserved.
   </div>
 </div>
-
-
-
-

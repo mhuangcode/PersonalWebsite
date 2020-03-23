@@ -1,15 +1,17 @@
 .three-canvas {
-    width: 100vh;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    transition: left ease-in-out 1000ms;
+  width: 100%;
+  height: 95vh;
+  position: fixed;
+  top: 0;
+  opacity: 0;
+  transition: left ease-in-out 1000ms, opacity ease-in 1000ms;
+  overflow: hidden;
 }
 
 .large {
-    left: 9vw;
+  left: 9vw;
 }
 
 .small {
-    left: 0;
+  left: 0;
 }

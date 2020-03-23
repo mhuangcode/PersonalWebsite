@@ -1,0 +1,20 @@
+.icons {
+  padding-left: 5px;
+  padding-top: 0.5vh;
+  padding-bottom: 0.75vh;
+
+  svg {
+    max-width: 3.5vmin;
+    opacity: 1;
+  }
+}
+
+.dark {
+  svg {
+    fill: rgb(240, 240, 240) !important;
+  }
+
+  svg:hover {
+    fill: rgb(75, 204, 144) !important;
+  }
+}

@@ -1,117 +1,167 @@
-@import url('https://fonts.googleapis.com/css?family=Sen&display=swap');
-
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    width: 100vw;
-    font-family: 'Sen', sans-serif;
+@import url("https://fonts.googleapis.com/css?family=Sen&display=swap");
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  font-family: "Sen", sans-serif;
+  font-weight: 400;
+  background-size: 150% 150%;
 }
 
 button {
-    background: none;
-    border: none;
-    
+  background: none;
+  border: none;
 }
 
 button:focus {
-    outline: none;
+  outline: none;
 }
 
-
-
 .light {
-    background: rgb(163, 237, 255);
-    background: linear-gradient(135deg, rgb(183, 255, 243) 25%, rgb(255, 227, 236) 75%);
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+  background: rgb(163, 237, 255);
+  background: linear-gradient(
+    135deg,
+    rgb(183, 255, 243) 25%,
+    rgb(255, 227, 236) 75%
+  );
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 
-    .large {
-        color: #270031;
+  .large {
+    color: #270031;
 
-        canvas {
-            opacity: 1;
-        }
-    
-        svg {
-            fill: #270031;
-        }
-
-        svg:hover {
-            fill: #97196d;
-        }
-
-        .secondary {
-            color: #a83298;
-        }
+    canvas {
+      opacity: 1;
+      transition: opacity ease-in 1000ms !important;
     }
 
-    .small {
-        color: #1d0025;
-
-        canvas {
-            opacity: 0.4;
-        }
-
-        svg {
-            fill: #1d0025;
-        }
-
-        svg:hover {
-            fill: rgb(0, 35, 36);
-        }
-        
-        .secondary {
-            color: rgb(0, 35, 36);
-        }
+    svg {
+      fill: #270031;
     }
+
+    svg:hover {
+      fill: #97196d;
+    }
+
+    .secondary {
+      color: #a83298;
+    }
+  }
+
+  .small {
+    color: #1d0025;
+
+    canvas {
+      opacity: 0.1;
+      transition: opacity ease-in 1000ms !important;
+    }
+
+    svg {
+      fill: #1d0025;
+    }
+
+    svg:hover {
+      fill: rgb(0, 35, 36);
+    }
+
+    .secondary {
+      color: rgb(0, 35, 36);
+    }
+  }
 }
 
 .dark {
-    background: rgb(25, 110, 131);
-    background: linear-gradient(135deg, rgb(0, 36, 36) 45%, rgb(36, 0, 30) 85%);
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    color: rgb(231, 231, 231);
+  background: rgb(25, 110, 131);
+  background: linear-gradient(135deg, rgb(0, 36, 36) 45%, rgb(36, 0, 30) 85%);
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  color: rgb(231, 231, 231);
 
+  canvas {
+    opacity: 0.8;
+  }
+
+  .large {
     canvas {
-        opacity: 0.8;
-        transition: opacity ease-in 1000ms;
-    }
-    
-    .large {
-        svg {
-            fill: #fae8ff;
-        }
-
-        svg:hover {
-            fill: #fac1ff;
-        }
-
-        .secondary {
-            color: #fad0ff;
-        }
+      transition: opacity ease-in 1000ms !important;
     }
 
-    .small {
-        canvas {
-            opacity: 0.3;
-        }
-
-        svg {
-            fill: white;
-        }
-
-        svg:hover {
-            fill: rgb(195, 253, 255);
-        }
-        
-        .secondary {
-            color: rgb(124, 211, 214);
-        }
+    svg {
+      fill: #fae8ff;
     }
+
+    svg:hover {
+      fill: #fac1ff;
+    }
+
+    .secondary {
+      color: #fad0ff;
+    }
+  }
+
+  .small {
+    canvas {
+      opacity: 0.2;
+      transition: opacity ease-in 1000ms !important;
+    }
+
+    svg {
+      fill: white;
+    }
+
+    svg:hover {
+      fill: rgb(195, 253, 255);
+    }
+
+    .secondary {
+      color: rgb(124, 211, 214);
+    }
+  }
+}
+
+h1 {
+  transition: font-size 500ms;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  font-weight: 800;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 4vmin;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+h3 {
+  font-weight: 550;
+  font-size: 2vmin;
+  margin-block-start: 1.75vmin;
+  margin-block-end: 1.5vmin;
+}
+
+h4 {
+  font-weight: 550;
+  margin-block-start: 1.25vmin;
+  margin-block-end: 1vmin;
+  opacity: 0.85;
+  font-size: 2vmin;
+}
+
+h5 {
+  font-weight: 500;
+  font-size: 2vmin;
+  margin-block-start: 1vmin;
+  margin-block-end: 1vmin;
+}
+
+.small {
+  h4 {
+    font-size: 2.5vmin;
+  }
 }

@@ -5,7 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class ColorModeService {
   darkMode = false;
-  constructor() { }
+  constructor() { 
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      this.darkMode = true;
+    }
+  }
 
   set mode(darkMode: boolean) {
     this.darkMode = darkMode;
