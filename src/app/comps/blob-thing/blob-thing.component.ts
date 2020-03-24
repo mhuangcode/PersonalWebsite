@@ -12,12 +12,12 @@ import {
   PerspectiveCamera,
   WebGLRenderer,
   Mesh,
-  MeshNormalMaterial,
-  IcosahedronGeometry
+  ShaderMaterial,
+  IcosahedronBufferGeometry
 } from "three";
 
-import * as SimplexNoise from "simplex-noise";
-const noise = new SimplexNoise();
+import * as shaders from "./shaders/shaders";
+
 @Component({
   selector: "app-blob-thing",
   templateUrl: "./blob-thing.component.html",
@@ -45,47 +45,29 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
   });
   private camera: PerspectiveCamera;
 
-  private blobGeometry: IcosahedronGeometry = new IcosahedronGeometry(15, 5);
+  private blobGeometry: IcosahedronBufferGeometry = new IcosahedronBufferGeometry(
+    15,
+    5
+  );
   private blobMesh: Mesh;
-
-  private mathWorker: Worker;
   private mathLock = true;
 
-  private started = false;
+  material = new ShaderMaterial({
+    wireframe: true,
+    vertexShader: shaders.default.vertex,
+    fragmentShader: shaders.default.fragment,
+    uniforms: {
+      time: {
+        type: "f",
+        value: 0.0
+      }
+    }
+  });
   canvasDom: any;
 
   constructor() {}
 
   ngOnInit(): void {
-    this.mathWorker = new Worker("./../../helpers/math.worker", {
-      type: "module"
-    });
-
-    this.mathWorker.onmessage = ({ data }) => {
-      const { radius, scalar } = data;
-      this.blobGeometry.vertices.forEach((vert, index) => {
-        vert.normalize();
-        vert.multiplyScalar(
-          this.blobGeometry.parameters.radius +
-            noise.noise3D(
-              scalar[index].x + vert.x,
-              scalar[index].y + vert.y,
-              scalar[index].z + vert.z
-            ) *
-              5
-        );
-      });
-
-      this.blobGeometry.verticesNeedUpdate = true;
-      this.mathLock = false;
-
-      if (!this.started) {
-        this.scene.add(this.blobMesh);
-        this.canvasElem.nativeElement.style.opacity = "inherit";
-        this.started = true;
-      }
-    };
-
     this.mathLock = false;
   }
 
@@ -116,30 +98,25 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
 
     this.renderer.render(this.scene, this.camera);
     this.updateBlob();
+    this.material.uniforms["time"].value = 0.05 * window.performance.now();
   }
 
   private updateBlob(): void {
     if (this.blobGeometry) {
       this.blobMesh.rotation.y += 0.001;
-      this.blobMesh.rotation.x += 0.0005;
+      this.blobMesh.rotation.x -= 0.0005;
     }
 
     if (this.mathLock) {
       return;
     }
 
-    const radius = this.blobGeometry.parameters.radius;
-    this.mathWorker.postMessage({
-      radius: radius,
-      verts: this.blobGeometry.vertices
-    });
     this.mathLock = true;
   }
 
   private generateGeometry(): void {
-    const mat = new MeshNormalMaterial({
-      wireframe: true
-    });
-    this.blobMesh = new Mesh(this.blobGeometry, mat);
+    this.blobMesh = new Mesh(this.blobGeometry, this.material);
+    this.scene.add(this.blobMesh);
+    this.canvasElem.nativeElement.style.opacity = "inherit";
   }
 }
