@@ -13,10 +13,13 @@ import {
   WebGLRenderer,
   Mesh,
   MeshNormalMaterial,
-  IcosahedronGeometry
+  IcosahedronGeometry,
+  ShaderMaterial
 } from "three";
 
 import * as SimplexNoise from "simplex-noise";
+import * as shaders from "./shaders/shaders";
+
 const noise = new SimplexNoise();
 @Component({
   selector: "app-blob-thing",
@@ -50,6 +53,18 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
 
   private mathWorker: Worker;
   private mathLock = true;
+
+  material = new ShaderMaterial({
+    wireframe: true,
+    vertexShader: shaders.default.vertex,
+    fragmentShader: shaders.default.fragment,
+    uniforms: {
+      time: {
+        type: "f",
+        value: 0.0
+      }
+    }
+  });
 
   private started = false;
   canvasDom: any;
@@ -116,12 +131,13 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
 
     this.renderer.render(this.scene, this.camera);
     this.updateBlob();
+    this.material.uniforms["time"].value = 0.00025 * window.performance.now();
   }
 
   private updateBlob(): void {
     if (this.blobGeometry) {
       this.blobMesh.rotation.y += 0.001;
-      this.blobMesh.rotation.x += 0.0005;
+      this.blobMesh.rotation.x -= 0.0005;
     }
 
     if (this.mathLock) {
@@ -137,9 +153,7 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
   }
 
   private generateGeometry(): void {
-    const mat = new MeshNormalMaterial({
-      wireframe: true
-    });
-    this.blobMesh = new Mesh(this.blobGeometry, mat);
+    this.blobMesh = new Mesh(this.blobGeometry, this.material);
+    this.material.uniforms["time"].value = 0.00025 * Date.now();
   }
 }
