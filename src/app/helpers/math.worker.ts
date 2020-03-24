@@ -1,7 +1,7 @@
 /// <reference lib="webworker" />
-
+let now = 0;
 addEventListener("message", ({ data }) => {
-  const { verts, now } = data;
+  const { verts } = data;
 
   const scalar = [];
   verts.forEach(() => {
@@ -12,5 +12,9 @@ addEventListener("message", ({ data }) => {
     });
   });
 
-  postMessage(scalar);
+  now++;
+
+  postMessage({
+    scalar: scalar
+  });
 });

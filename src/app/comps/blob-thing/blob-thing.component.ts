@@ -50,7 +50,6 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
 
   private mathWorker: Worker;
   private mathLock = true;
-  private tick = 0;
 
   private started = false;
   canvasDom: any;
@@ -62,15 +61,16 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
       type: "module"
     });
 
-    this.mathWorker.onmessage = data => {
+    this.mathWorker.onmessage = ({ data }) => {
+      const { radius, scalar } = data;
       this.blobGeometry.vertices.forEach((vert, index) => {
         vert.normalize();
         vert.multiplyScalar(
           this.blobGeometry.parameters.radius +
             noise.noise3D(
-              data.data[index].x + vert.x,
-              data.data[index].y + vert.y,
-              data.data[index].z + vert.z
+              scalar[index].x + vert.x,
+              scalar[index].y + vert.y,
+              scalar[index].z + vert.z
             ) *
               5
         );
@@ -78,7 +78,6 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
 
       this.blobGeometry.verticesNeedUpdate = true;
       this.mathLock = false;
-      this.tick += 1;
 
       if (!this.started) {
         this.scene.add(this.blobMesh);
@@ -131,7 +130,6 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
 
     const radius = this.blobGeometry.parameters.radius;
     this.mathWorker.postMessage({
-      now: this.tick,
       radius: radius,
       verts: this.blobGeometry.vertices
     });
