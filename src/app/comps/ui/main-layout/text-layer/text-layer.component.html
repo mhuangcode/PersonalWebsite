@@ -1,20 +1,25 @@
 <div
   fxLayout="row wrap"
-  fxLayoutAlign="center center"
+  fxLayoutAlign="start center"
   class="main-container"
+  fxFill
   ngClass="small large"
   [ngClass.gt-sm]="{ small: false, large: true }"
 >
+  <h1 fxFlex="100">
+    Martin
+  </h1>
+
+  <h1 fxFlex="100">
+    Huang
+  </h1>
+
+  <h2 fxFlex="100" style="padding-left: 1.9vw;">
+    Software Engineer
+  </h2>
+
   <div fxFlex [fxFlex.lt-md]="100">
-    <h1>
-      Martin Huang
-    </h1>
-
     <div class="info-container">
-      <h2>
-        Software Engineer
-      </h2>
-
       <app-experience-list></app-experience-list>
 
       <app-language-list></app-language-list>

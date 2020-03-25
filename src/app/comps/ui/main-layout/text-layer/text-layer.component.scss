@@ -1,12 +1,11 @@
 .main-container {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
   transition: color ease-in 500ms;
+  min-height: 100vh !important;
+  position: relative;
 
   .info-container {
     padding-left: 2vw;
+    animation: fadeIn 1.75s;
   }
 
   svg:hover {
@@ -24,17 +23,15 @@
   text-align: left;
 
   .info-container {
-    max-width: 27.7vw;
+    max-width: 30vmax;
   }
 
   button {
-    max-width: 3px;
-    min-width: 3vw;
-
-    border-radius: 30px;
+    min-width: 48px;
   }
 
   .footer {
+    animation: fadeIn 1.75s;
     position: fixed;
     right: 3vw;
     overflow: hidden;
@@ -42,14 +39,14 @@
     .icon-title {
       font-size: 1.8vw;
       font-weight: 500;
-      padding-bottom: 0.5vh;
+      padding-bottom: 0.25vh;
       margin-right: 1vw;
       transition: opacity 600ms;
     }
   }
 
   h1 {
-    font-size: 8.5vw;
+    font-size: 8.5vmax;
     margin-block-start: 0;
     padding-left: 1.25vmax;
     max-width: 27.7vw;
@@ -62,7 +59,7 @@
 
   .info-container {
     margin-block-end: 20px;
-    max-width: 80vw;
+    max-width: 70vw;
   }
 
   .footer {
@@ -70,6 +67,7 @@
     width: 100vw;
     right: 0;
     position: fixed;
+    animation: fadeIn 1.75s;
 
     .icon-container {
       max-width: 5vw;
@@ -85,7 +83,7 @@
 
   button {
     max-width: 8vh;
-    min-width: 6vh;
+    min-width: 32px;
 
     svg {
       margin-top: 2vh;
@@ -101,6 +99,34 @@
     font-weight: 700;
     line-height: 0.75;
     margin-bottom: 1vh;
-    padding-left: 0vmax;
+    padding-left: 1vw;
+  }
+}
+
+@keyframes fadeLeft {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(10vw, 0);
+    transform: translate3d(10vw, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }

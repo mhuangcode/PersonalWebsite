@@ -8,8 +8,8 @@ ul {
   ul {
     li {
       list-style-type: none;
-      margin-top: 1vh;
-      font-size: 0.75vw;
+      margin-top: 0.75vh;
+      font-size: 1vmax;
       text-align: justify;
     }
   }
@@ -18,14 +18,12 @@ ul {
 .small {
   ul {
     max-width: 80vw;
-    margin-block-end: 1.5vh;
     li {
       list-style-type: none;
       margin-top: 5px;
       text-align: justify;
       padding-right: 10vw;
-      font-size: 2.2vmin;
-      font-weight: 50;
+      font-size: 1.4vmax;
     }
   }
 }

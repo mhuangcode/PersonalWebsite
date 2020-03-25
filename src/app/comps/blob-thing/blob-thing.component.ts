@@ -16,7 +16,8 @@ import {
   IcosahedronBufferGeometry
 } from "three";
 
-import * as shaders from "./shaders/shaders";
+import * as vertexShader from "./shaders/vertexShader.shader";
+import * as fragmentShader from "./shaders/fragmentShder.shader";
 
 @Component({
   selector: "app-blob-thing",
@@ -28,7 +29,7 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
   onWinResize() {
     if (this.camera) {
       const width = window.innerWidth;
-      const height = window.innerHeight * 0.95;
+      const height = window.innerHeight;
       this.camera.aspect = width / height;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(width, height);
@@ -47,15 +48,15 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
 
   private blobGeometry: IcosahedronBufferGeometry = new IcosahedronBufferGeometry(
     15,
-    5
+    6
   );
+
   private blobMesh: Mesh;
-  private mathLock = true;
 
   material = new ShaderMaterial({
     wireframe: true,
-    vertexShader: shaders.default.vertex,
-    fragmentShader: shaders.default.fragment,
+    vertexShader: vertexShader.default,
+    fragmentShader: fragmentShader.default,
     uniforms: {
       time: {
         type: "f",
@@ -67,16 +68,14 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    this.mathLock = false;
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.canvasElem.nativeElement.style.opacity = 0;
 
     new Promise((resolve, reject) => {
       const width = window.innerWidth;
-      const height = window.innerHeight * 0.95;
+      const height = window.innerHeight;
 
       this.camera = new PerspectiveCamera(75, width / height, 0.1, 1000);
       this.camera.updateProjectionMatrix();
@@ -97,8 +96,8 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
     });
 
     this.renderer.render(this.scene, this.camera);
-    this.updateBlob();
     this.material.uniforms["time"].value = 0.05 * window.performance.now();
+    this.updateBlob();
   }
 
   private updateBlob(): void {
@@ -106,12 +105,6 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
       this.blobMesh.rotation.y += 0.001;
       this.blobMesh.rotation.x -= 0.0005;
     }
-
-    if (this.mathLock) {
-      return;
-    }
-
-    this.mathLock = true;
   }
 
   private generateGeometry(): void {

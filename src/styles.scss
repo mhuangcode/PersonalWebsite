@@ -1,12 +1,8 @@
-@import url("https://fonts.googleapis.com/css?family=Sen&display=swap");
 html,
 body {
   margin: 0;
   padding: 0;
-  height: 100vh;
-  width: 100vw;
   font-family: "Sen", sans-serif;
-  font-weight: 400;
   background-size: 150% 150%;
 }
 
@@ -20,16 +16,10 @@ button:focus {
 }
 
 .light {
-  background: rgb(163, 237, 255);
-  background: linear-gradient(
-    135deg,
-    rgb(183, 255, 243) 25%,
-    rgb(255, 227, 236) 75%
-  );
-  position: absolute;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  font-weight: 500;
 
   .large {
     color: #270031;
@@ -56,7 +46,7 @@ button:focus {
     color: #1d0025;
 
     canvas {
-      opacity: 0.1;
+      opacity: 0.15;
       transition: opacity ease-in 1000ms !important;
     }
 
@@ -74,10 +64,25 @@ button:focus {
   }
 }
 
-.dark {
+.bg-dark {
+  position: fixed;
+  z-index: -99;
   background: rgb(25, 110, 131);
   background: linear-gradient(135deg, rgb(0, 36, 36) 45%, rgb(36, 0, 30) 85%);
-  position: absolute;
+}
+
+.bg-light {
+  position: fixed;
+  z-index: -99;
+  background: rgb(163, 237, 255);
+  background: linear-gradient(
+    135deg,
+    rgb(160, 238, 225) 25%,
+    rgb(255, 227, 236) 75%
+  );
+}
+
+.dark {
   width: 100vw;
   height: 100vh;
   color: rgb(231, 231, 231);
@@ -115,7 +120,7 @@ button:focus {
     }
 
     svg:hover {
-      fill: rgb(195, 253, 255);
+      fill: #fac1ff;
     }
 
     .secondary {
@@ -124,44 +129,58 @@ button:focus {
   }
 }
 
+//name
 h1 {
   transition: font-size 500ms;
   margin-block-start: 0;
   margin-block-end: 0;
   font-weight: 800;
+  animation: fadeUp 1s;
 }
 
+//title
 h2 {
   font-weight: 600;
-  font-size: 4vmin;
+  font-size: 1.75vmax;
   margin-block-start: 0;
   margin-block-end: 0;
+  animation: fadeUp 1.25s !important;
 }
 
+//unused
 h3 {
-  font-weight: 550;
-  font-size: 2vmin;
-  margin-block-start: 1.75vmin;
+  font-weight: 600;
+  font-size: 2.25vmax;
+  margin-block-start: 1.5vmin;
   margin-block-end: 1.5vmin;
 }
 
+//list title
 h4 {
-  font-weight: 550;
-  margin-block-start: 1.25vmin;
+  font-weight: 600;
+  margin-block-start: 1vmin;
   margin-block-end: 1vmin;
-  opacity: 0.85;
-  font-size: 2vmin;
+  font-size: 1.15vmax;
 }
 
+//sublist title
 h5 {
   font-weight: 500;
-  font-size: 2vmin;
+  font-size: 0.9vmax;
   margin-block-start: 1vmin;
   margin-block-end: 1vmin;
 }
 
-.small {
-  h4 {
-    font-size: 2.5vmin;
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 5vh, 0);
+    transform: translate3d(0, 5vh, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
 }

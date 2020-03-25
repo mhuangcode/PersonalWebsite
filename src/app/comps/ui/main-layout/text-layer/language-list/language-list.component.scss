@@ -10,11 +10,13 @@
 }
 
 .dark {
-  svg {
-    fill: rgb(240, 240, 240) !important;
-  }
+  .icons {
+    svg {
+      fill: rgba(255, 255, 255, 0.9);
+    }
 
-  svg:hover {
-    fill: rgb(75, 204, 144) !important;
+    svg:hover {
+      fill: rgb(75, 204, 144) !important;
+    }
   }
 }
