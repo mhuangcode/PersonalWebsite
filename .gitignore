@@ -52,3 +52,5 @@ Thumbs.db
 firebase.json
 
 public/
+
+.vscode/launch.json
