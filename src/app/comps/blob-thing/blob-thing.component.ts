@@ -40,20 +40,22 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
   @ViewChild("threeCanvas") canvasElem: ElementRef;
 
   private scene: Scene = new Scene();
+  private camera: PerspectiveCamera;
+  private blobMesh: Mesh;
+  // number to offset performance start, acts like a seed param
+  private seed = Math.random() * 123456;
+
   private renderer: WebGLRenderer = new WebGLRenderer({
     alpha: true,
     antialias: true
   });
-  private camera: PerspectiveCamera;
 
   private blobGeometry: IcosahedronBufferGeometry = new IcosahedronBufferGeometry(
     15,
     6
   );
 
-  private blobMesh: Mesh;
-
-  material = new ShaderMaterial({
+  private material = new ShaderMaterial({
     wireframe: true,
     vertexShader: vertexShader.default,
     fragmentShader: fragmentShader.default,
@@ -64,7 +66,6 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
       }
     }
   });
-  canvasDom: any;
 
   constructor() {}
 
@@ -82,7 +83,7 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
       this.renderer.setSize(width, height);
       this.renderer.setClearColor(0x000000, 0.0);
       this.canvasElem.nativeElement.appendChild(this.renderer.domElement);
-      this.camera.position.z = 32;
+      this.camera.position.z = 31;
       this.generateGeometry();
       resolve();
     }).then(() => {
@@ -96,7 +97,8 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
     });
 
     this.renderer.render(this.scene, this.camera);
-    this.material.uniforms["time"].value = 0.05 * window.performance.now();
+    this.material.uniforms["time"].value =
+      0.025 * window.performance.now() + this.seed;
     this.updateBlob();
   }
 

@@ -4,12 +4,12 @@
   position: fixed;
   top: 0;
   opacity: 0;
-  transition: left ease-in-out 1000ms, opacity ease-in 1000ms;
+  transition: left ease-in-out 1000ms, opacity ease-in 3000ms;
   overflow: hidden !important;
 }
 
 .large {
-  left: 9vw;
+  left: 11vw;
 }
 
 .small {

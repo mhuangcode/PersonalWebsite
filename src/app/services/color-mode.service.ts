@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class ColorModeService {
   darkMode = false;
-  constructor() { 
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      this.darkMode = true;
-    }
+  constructor() {
+    this.mode =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
   }
 
   set mode(darkMode: boolean) {
