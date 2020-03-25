@@ -1,4 +1,4 @@
-const vertexShader = `
+export default `
 //	Simplex 3D Noise 
 //	by Ian McEwan, Ashima Arts
 //
@@ -93,18 +93,4 @@ void main() {
   gl_Position = projectionMatrix * modelViewMatrix * vec4( nPos * noise, 1.0 );
 
 }
-`;
-
-const fragmentShader = `
-varying vec3 vNormal;
-#include <packing>
-
-void main() {
- gl_FragColor = vec4( packNormalToRGB( vNormal ), 1. );
-}
-`;
-
-export default {
-  fragment: fragmentShader,
-  vertex: vertexShader
-};
+` as string;
