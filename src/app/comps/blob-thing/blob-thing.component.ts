@@ -36,7 +36,6 @@ export class BlobThingComponent implements OnInit, AfterViewInit {
     }
   }
 
-  @ViewChild("threeStats") statsElem: ElementRef;
   @ViewChild("threeCanvas") canvasElem: ElementRef;
 
   private scene: Scene = new Scene();
